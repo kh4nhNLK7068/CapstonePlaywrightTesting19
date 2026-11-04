@@ -1,0 +1,80 @@
+name: Playwright Tests
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+  workflow_dispatch:
+    inputs:
+      filter:
+        description: 'dotnet test --filter expression (e.g. TestCategory=Smoke)'
+        required: false
+        default: ''
+      browser:
+        description: 'Browser to run on'
+        type: choice
+        options: [ chromium, firefox, webkit ]
+        default: chromium
+  schedule:
+    - cron: '0 1 * * *' # nightly regression, 08:00 Vietnam time
+
+permissions:
+  contents: read
+  checks: write # test-reporter publishes a check run
+
+jobs:
+  test:
+    name: Test (${{ matrix.browser }})
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    strategy:
+      fail-fast: false
+      matrix:
+        browser: [ "${{ github.event.inputs.browser || 'chromium' }}" ]
+
+    env:
+      TEST_Browser__Type: ${{ matrix.browser }}
+      TEST_Browser__Headless: 'true'
+      # Optional: set these repository secrets to use a fixed account instead of auto-provisioning one.
+      TEST_TestAccount__Username: ${{ secrets.TEST_ACCOUNT_USERNAME }}
+      TEST_TestAccount__Password: ${{ secrets.TEST_ACCOUNT_PASSWORD }}
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup .NET 8
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '8.0.x'
+
+      - name: Restore & build
+        run: dotnet build --configuration Release
+
+      - name: Install Playwright browser + OS dependencies
+        run: pwsh CapstonePlaywrightTesting19/bin/Release/net8.0/playwright.ps1 install --with-deps ${{ matrix.browser }}
+
+      - name: Run tests
+        run: >
+          dotnet test --no-build --configuration Release
+          --logger "trx;LogFileName=results-${{ matrix.browser }}.trx"
+          --logger "console;verbosity=normal"
+          ${{ github.event.inputs.filter != '' && format('--filter "{0}"', github.event.inputs.filter) || '' }}
+
+      - name: Upload HTML report, logs, screenshots & traces
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: test-results-${{ matrix.browser }}
+          path: |
+            CapstonePlaywrightTesting19/bin/Release/net8.0/TestResults/
+            CapstonePlaywrightTesting19/TestResults/*.trx
+          retention-days: 14
+
+      - name: Publish test summary
+        if: always()
+        uses: dorny/test-reporter@v1
+        with:
+          name: NUnit results (${{ matrix.browser }})
+          path: CapstonePlaywrightTesting19/TestResults/*.trx
+          reporter: dotnet-trx

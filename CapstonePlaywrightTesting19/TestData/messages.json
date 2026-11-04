@@ -1,0 +1,15 @@
+{
+  "SignInSuccess": "Đăng nhập thành công",
+  "SignUpSuccess": "Đăng ký thành công",
+  "SignOutQuestion": "Bạn có muốn đăng xuất ?",
+  "SignOutDone": "Đã đăng xuất",
+  "DuplicateAccount": "tồn tại",
+  "BookingNotLoggedInTitle": "Bạn chưa đăng nhập",
+  "BookingNotLoggedInText": "Bạn có muốn đăng nhập không ?",
+  "BookingNoSeatTitle": "Bạn chưa chọn ghế",
+  "BookingNoSeatText": "Vui lòng chọn ghế ?",
+  "BookingSuccessTitle": "Đặt vé thành công",
+  "BookingSuccessText": "Kiểm tra trong lịch sử đặt vé",
+  "HomePageTitle": "Cybersoft - Đặt vé nhanh nhất",
+  "PreferredShowtimeIds": [ 45051, 46178, 46109, 45805, 45061 ]
+}

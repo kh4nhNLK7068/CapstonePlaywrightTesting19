@@ -13,3 +13,11 @@
 # Temporary files
 *.tmp
 *.log
+# Test artifacts
+TestResults/
+playwright-report/
+*.trx
+
+# Local secrets (test account credentials etc.)
+**/Configuration/appsettings.local.json
+.env

@@ -1,0 +1,23 @@
+[
+  {
+    "Id": "TC_HS_01",
+    "Title": "Buy now without choosing a movie",
+    "SelectMovie": false, "SelectCinema": false, "SelectShowtime": false,
+    "ExpectedTitle": "Bạn chưa chọn phim",
+    "ExpectedText": "Vui lòng chọn phim"
+  },
+  {
+    "Id": "TC_HS_02",
+    "Title": "Buy now with movie only",
+    "SelectMovie": true, "SelectCinema": false, "SelectShowtime": false,
+    "ExpectedTitle": "Bạn chưa chọn rạp",
+    "ExpectedText": "Vui lòng chọn rạp"
+  },
+  {
+    "Id": "TC_HS_03",
+    "Title": "Buy now with movie and cinema but no showtime",
+    "SelectMovie": true, "SelectCinema": true, "SelectShowtime": false,
+    "ExpectedTitle": "Bạn chưa chọn ngày giờ chiếu",
+    "ExpectedText": "Vui lòng chọn ngày giờ chiếu"
+  }
+]
