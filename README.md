@@ -1,9 +1,9 @@
 # CapstonePlaywrightTesting19
 
-Framework kiểm thử tự động cho **APP 1 – Hệ thống đặt vé xem phim** (<https://demo1.cybersoft.edu.vn/>),
+Framework kiểm thử tự động cho **APP 1 - Hệ thống đặt vé xem phim** (<https://demo1.cybersoft.edu.vn/>),
 xây dựng bằng **Playwright for .NET + NUnit** theo mô hình **Page Object Model (POM)**.
 
-> Đồ án cuối khoá Testing – Cybersoft. Phần Automation: xây dựng framework bằng Playwright.
+> Đồ án cuối khoá Testing - Cybersoft. Phần Automation: xây dựng framework bằng Playwright.
 
 | Hạng mục | Công nghệ |
 |---|---|
@@ -42,9 +42,9 @@ xây dựng bằng **Playwright for .NET + NUnit** theo mô hình **Page Object 
 |---|---|
 | Tổng số test case (spreadsheet) | **45** |
 | Tổng số lượt test tự động (tính cả các bộ dữ liệu của data-driven test) | **48** |
-| Test không cần tài khoản – đã chạy | **41 / 41 Passed** · 0 Failed · 0 Skipped |
+| Test không cần tài khoản - đã chạy | **41 / 41 Passed** · 0 Failed · 0 Skipped |
 | Thời gian chạy 41 test | **31 giây** |
-| Test cần tài khoản (category `RequiresAccount`) | 7 – chạy riêng bằng tài khoản test (xem [mục 6.4](#64-lọc-test-theo-nhóm--class--tên)) |
+| Test cần tài khoản (category `RequiresAccount`) | 7 - chạy riêng bằng tài khoản test (xem [mục 6.4](#64-lọc-test-theo-nhóm--class--tên)) |
 
 **Kết quả theo module**
 
@@ -74,12 +74,12 @@ nằm trong [`docs/TestCases.xlsx`](docs/TestCases.xlsx).
 
 | Module | Test case | Loại |
 |---|---|---|
-| Smoke / điều hướng | TC_SMK_01 – 06 | Trang chủ hiển thị, menu header, link Đăng nhập/Đăng ký, logo |
-| Đăng ký | TC_SU_01 – 09 (data-driven), 10, 11, 12 | Bỏ trống trường bắt buộc, mật khẩu < 6 ký tự, nhập lại mật khẩu không khớp, họ tên chứa số, lỗi biến mất khi sửa, đăng ký thành công, trùng tài khoản (server) |
-| Đăng nhập | TC_SI_01 – 04 (data-driven), 05 – 06 (data-driven, server), 07 – 10 | Bỏ trống, mật khẩu < 6 ký tự, sai tài khoản, ẩn/hiện mật khẩu, đăng nhập thành công, đăng xuất (đồng ý / huỷ) |
-| Đặt vé nhanh | TC_HS_01 – 03 (data-driven), 04, 05 | Thiếu phim / rạp / suất chiếu, chọn đủ → trang chọn ghế, dropdown phụ thuộc nhau |
-| Chi tiết phim | TC_MD_01 – 03 | Poster → trang chi tiết, suất chiếu → trang chọn ghế, nút “Mua vé” cuộn trang |
-| Chọn ghế & đặt vé | TC_BK_01 – 09 | Sơ đồ ghế, chọn/bỏ chọn, tổng tiền, ghế đã đặt, đặt vé khi chưa đăng nhập, chưa chọn ghế, đặt vé thành công |
+| Smoke / điều hướng | TC_SMK_01 - 06 | Trang chủ hiển thị, menu header, link Đăng nhập/Đăng ký, logo |
+| Đăng ký | TC_SU_01 - 09 (data-driven), 10, 11, 12 | Bỏ trống trường bắt buộc, mật khẩu < 6 ký tự, nhập lại mật khẩu không khớp, họ tên chứa số, lỗi biến mất khi sửa, đăng ký thành công, trùng tài khoản (server) |
+| Đăng nhập | TC_SI_01 - 04 (data-driven), 05 - 06 (data-driven, server), 07 - 10 | Bỏ trống, mật khẩu < 6 ký tự, sai tài khoản, ẩn/hiện mật khẩu, đăng nhập thành công, đăng xuất (đồng ý / huỷ) |
+| Đặt vé nhanh | TC_HS_01 - 03 (data-driven), 04, 05 | Thiếu phim / rạp / suất chiếu, chọn đủ → trang chọn ghế, dropdown phụ thuộc nhau |
+| Chi tiết phim | TC_MD_01 - 03 | Poster → trang chi tiết, suất chiếu → trang chọn ghế, nút “Mua vé” cuộn trang |
+| Chọn ghế & đặt vé | TC_BK_01 - 09 | Sơ đồ ghế, chọn/bỏ chọn, tổng tiền, ghế đã đặt, đặt vé khi chưa đăng nhập, chưa chọn ghế, đặt vé thành công |
 
 Nhóm test (category) dùng để lọc khi chạy:
 
@@ -167,7 +167,7 @@ CapstonePlaywrightTesting19/                 ← thư mục gốc repo (chứa f
 | .NET SDK | 8.0 trở lên | Kiểm tra bằng `dotnet --list-sdks`. Nếu dùng SDK 9 thì máy cần có thêm **.NET 8 runtime** (`dotnet --list-runtimes`). |
 | PowerShell | 5.1 (Windows) hoặc PowerShell 7 `pwsh` (macOS/Linux) | Dùng để chạy script cài browser `playwright.ps1`. |
 | Git | bất kỳ | Để clone repo |
-| Kết nối Internet | – | Tải NuGet, tải browser và truy cập trang demo |
+| Kết nối Internet | - | Tải NuGet, tải browser và truy cập trang demo |
 
 Tải .NET SDK: <https://dotnet.microsoft.com/download/dotnet/8.0>
 
@@ -180,7 +180,7 @@ Mọi lệnh bên dưới chạy tại **thư mục gốc repo** (nơi có file 
 
 ### 6.1. Clone và cài đặt
 
-**Bước 1 – Clone repo**
+**Bước 1 - Clone repo**
 
 ```bash
 git clone https://github.com/kh4nhNLK7068/CapstonePlaywrightTesting19.git
@@ -190,7 +190,7 @@ git clone https://github.com/kh4nhNLK7068/CapstonePlaywrightTesting19.git
 cd CapstonePlaywrightTesting19
 ```
 
-**Bước 2 – Restore package & build**
+**Bước 2 - Restore package & build**
 
 ```bash
 dotnet restore
@@ -200,7 +200,7 @@ dotnet restore
 dotnet build
 ```
 
-**Bước 3 – Cài trình duyệt cho Playwright** (chỉ cần làm một lần trên mỗi máy)
+**Bước 3 - Cài trình duyệt cho Playwright** (chỉ cần làm một lần trên mỗi máy)
 
 Windows (PowerShell):
 
@@ -298,13 +298,13 @@ Mọi khoá trong `appsettings.json` đều ghi đè được bằng biến môi
 | Dùng Chrome/Edge cài sẵn trên máy | `TEST_Browser__Channel=chrome` (hoặc `msedge`) |
 | Tài khoản test | `TEST_TestAccount__Username=...` và `TEST_TestAccount__Password=...` |
 
-**Windows – PowerShell** (biến chỉ có hiệu lực trong cửa sổ terminal hiện tại):
+**Windows - PowerShell** (biến chỉ có hiệu lực trong cửa sổ terminal hiện tại):
 
 ```powershell
 $env:TEST_Browser__Headless = "false"; $env:TEST_Browser__SlowMo = "300"; dotnet test --filter "TestCategory=Smoke"
 ```
 
-**Windows – Command Prompt (cmd):**
+**Windows - Command Prompt (cmd):**
 
 ```bat
 set TEST_Browser__Headless=false && dotnet test --filter "TestCategory=Smoke"
@@ -419,9 +419,9 @@ File chính: `CapstonePlaywrightTesting19/Configuration/appsettings.json`
 
 **Thứ tự ưu tiên** (lớp sau ghi đè lớp trước):
 
-1. `appsettings.json` – giá trị mặc định, có commit.
-2. `appsettings.{TEST_ENV}.json` – theo môi trường (ví dụ `TEST_ENV=staging` → `appsettings.staging.json`).
-3. `appsettings.local.json` – cấu hình riêng trên máy, **không commit** (đã có trong `.gitignore`).
+1. `appsettings.json` - giá trị mặc định, có commit.
+2. `appsettings.{TEST_ENV}.json` - theo môi trường (ví dụ `TEST_ENV=staging` → `appsettings.staging.json`).
+3. `appsettings.local.json` - cấu hình riêng trên máy, **không commit** (đã có trong `.gitignore`).
 4. Biến môi trường `TEST_*`.
 
 **Cấu hình tài khoản test (không đưa lên Git):** copy file mẫu rồi điền tài khoản của bạn.

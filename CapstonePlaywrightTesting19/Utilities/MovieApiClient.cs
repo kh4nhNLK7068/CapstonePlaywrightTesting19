@@ -6,7 +6,7 @@ namespace CapstonePlaywrightTesting19.Utilities;
 
 /// <summary>
 /// Thin client for the backend API used by demo1. Used only for test setup / data lookup
-/// (provisioning an account, finding a showtime that still has free seats) – never for assertions
+/// (provisioning an account, finding a showtime that still has free seats) - never for assertions
 /// that the UI is supposed to cover.
 /// </summary>
 public sealed class MovieApiClient : IDisposable

@@ -21,7 +21,7 @@ public sealed class HeaderComponent
 
     public ILocator SignUpLink => Root.GetByRole(AriaRole.Link, new() { Name = "Đăng Ký", Exact = true });
 
-    /// <summary>Shown only when logged in – links to the account page and displays the user's full name.</summary>
+    /// <summary>Shown only when logged in - links to the account page and displays the user's full name.</summary>
     public ILocator AccountLink => Root.Locator("a[href='/account']");
 
     public ILocator SignOutLink => Root.GetByRole(AriaRole.Link, new() { Name = "Đăng xuất" });

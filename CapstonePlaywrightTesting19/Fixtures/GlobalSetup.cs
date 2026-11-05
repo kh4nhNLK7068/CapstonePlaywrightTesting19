@@ -22,7 +22,7 @@ public sealed class GlobalSetup
 
         Logger.Init(System.IO.Path.Combine(OutputDir, "Logs"));
         ReportManager.Init(System.IO.Path.Combine(OutputDir, "Reports"));
-        Logger.Info($"Test run started – {settings.BaseUrl} on {settings.Browser.Type} (headless={settings.Browser.Headless})");
+        Logger.Info($"Test run started - {settings.BaseUrl} on {settings.Browser.Type} (headless={settings.Browser.Headless})");
 
         // Idempotent: downloads the browser only if it's missing.
         var exitCode = Microsoft.Playwright.Program.Main(new[] { "install", settings.Browser.Type });
@@ -36,7 +36,7 @@ public sealed class GlobalSetup
     public void AfterAll()
     {
         ReportManager.Flush();
-        Logger.Info($"Test run finished – HTML report: {ReportManager.ReportPath}");
+        Logger.Info($"Test run finished - HTML report: {ReportManager.ReportPath}");
         Logger.Close();
     }
 }

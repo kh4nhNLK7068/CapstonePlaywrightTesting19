@@ -8,7 +8,7 @@ namespace CapstonePlaywrightTesting19.Pages;
 /// <summary>
 /// Common behaviour for every page object. Pages expose intent-level actions (LoginAsync, SelectSeat…)
 /// and locators; assertions live in the tests. All waits rely on Playwright auto-waiting / web-first
-/// assertions – there is no Thread.Sleep / WaitForTimeout anywhere in the framework.
+/// assertions - there is no Thread.Sleep / WaitForTimeout anywhere in the framework.
 /// </summary>
 public abstract class BasePage
 {

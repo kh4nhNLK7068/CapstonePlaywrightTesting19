@@ -17,7 +17,7 @@ public sealed class MovieDetailPage : BasePage
 
     public ILocator Title => Page.GetByRole(AriaRole.Heading, new() { Level = 1 });
 
-    /// <summary>react-scroll anchor without href (so it has no "link" role) – matched by its exact text.</summary>
+    /// <summary>react-scroll anchor without href (so it has no "link" role) - matched by its exact text.</summary>
     public ILocator BuyTicketLink => Page.Locator("a").GetByText("Mua vé", new() { Exact = true });
 
     public ILocator CinemaSystemTabs => Page.GetByRole(AriaRole.Tab);

@@ -4,10 +4,10 @@ namespace CapstonePlaywrightTesting19.Configuration;
 
 /// <summary>
 /// Loads settings in priority order (last wins):
-///   1. Configuration/appsettings.json            – committed defaults
-///   2. Configuration/appsettings.{TEST_ENV}.json – optional per-environment file
-///   3. Configuration/appsettings.local.json      – optional, git-ignored (secrets)
-///   4. Environment variables prefixed TEST_      – e.g. TEST_Browser__Headless=false
+///   1. Configuration/appsettings.json            - committed defaults
+///   2. Configuration/appsettings.{TEST_ENV}.json - optional per-environment file
+///   3. Configuration/appsettings.local.json      - optional, git-ignored (secrets)
+///   4. Environment variables prefixed TEST_      - e.g. TEST_Browser__Headless=false
 /// </summary>
 public static class ConfigManager
 {
