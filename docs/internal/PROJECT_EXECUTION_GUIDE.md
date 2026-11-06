@@ -1,15 +1,5 @@
 ﻿# Hướng Dẫn Luồng Thực Thi Dự Án CapstonePlaywrightTesting19
 
-## Giới Thiệu Chung
-
-**CapstonePlaywrightTesting19** là một dự án **Automated Testing (Kiểm thử tự động)** được xây dựng với:
-- **Ngôn ngữ:** C# (.NET 8)
-- **Framework Testing:** NUnit 3.14.0
-- **Công cụ tự động hoá:** Playwright 1.64.1
-- **Mục tiêu:** Kiểm thử ứng dụng web phim ticket booking
-
----
-
 ## 🎯 Mục Đích Của Dự Án
 
 Kiểm thử chức năng của ứng dụng web theo hình thức **automated testing**:
@@ -760,6 +750,4 @@ Dự án **CapstonePlaywrightTesting19** là một **test automation framework**
 ✅ **Quản lý tài nguyên tốt**: Browser được tái sử dụng, context/page cách ly  
 ✅ **Báo cáo chi tiết**: HTML report, screenshots, traces, logs  
 ✅ **Chạy song song**: Tăng tốc độ với `NumberOfTestWorkers=4`  
-✅ **Dễ mở rộng**: Thêm test class mới chỉ cần extends `BaseTest`  
-
-Hy vọng hướng dẫn này giúp bạn hiểu rõ luồng thực thi dự án! 🚀
+✅ **Dễ mở rộng**: Thêm test class mới chỉ cần extends `BaseTest` 
