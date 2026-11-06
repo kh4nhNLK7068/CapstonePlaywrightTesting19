@@ -10,4 +10,7 @@ public static class TestCategories
 
     /// <summary>Needs a real user account (logs in and/or registers users on the demo server).</summary>
     public const string RequiresAccount = "RequiresAccount";
+
+    /// <summary>Asserts the specified behaviour of a confirmed application bug – expected to fail until it is fixed.</summary>
+    public const string KnownDefect = "KnownDefect";
 }

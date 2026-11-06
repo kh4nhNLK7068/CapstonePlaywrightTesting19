@@ -166,6 +166,59 @@ public sealed class BookingTests : BaseTest
         // The seat map is reloaded: the booked seat is no longer offered.
         await purchase.WaitUntilReadyAsync();
         await Expect(purchase.Seat(seat)).ToHaveCountAsync(0);
+    }
+
+    [Test(Description = "TC_BK_10 - Logged-in user books several seats in one booking")]
+    [Category(TestCategories.HappyPath)]
+    [Category(TestCategories.RequiresAccount)]
+    public async Task TC_BK_10_BookMultipleSeatsAtOnce()
+    {
+        await LoginAsync();
+        var purchase = await OpenPurchasePageAsync();
+
+        var first = await purchase.SelectAvailableSeatAsync(0);
+        await Expect(purchase.TotalPrice).Not.ToHaveTextAsync("0VND");
+        var firstPrice = PurchasePage.ParsePrice(await purchase.TotalPrice.InnerTextAsync());
+
+        // index 1 = the next free seat (the selected one is still enabled, so skip it)
+        var second = await purchase.SelectAvailableSeatAsync(1);
+        await Expect(purchase.TotalPrice).Not.ToHaveTextAsync($"{firstPrice}VND");
+        await Expect(purchase.SelectedSeatsSummary).ToContainTextAsync($"Ghế {first}");
+        await Expect(purchase.SelectedSeatsSummary).ToContainTextAsync($"Ghế {second}");
+
+        await purchase.ClickBookAsync();
+
+        await Expect(purchase.Alert.Title).ToHaveTextAsync(AppMessages.Get.BookingSuccessTitle);
+        await purchase.Alert.ConfirmAsync();
+
+        // Both seats are booked by the single request.
+        await purchase.WaitUntilReadyAsync();
+        await Expect(purchase.Seat(first)).ToHaveCountAsync(0);
+        await Expect(purchase.Seat(second)).ToHaveCountAsync(0);
+    }
+
+    /// <summary>
+    /// Known defect: after a successful booking the app reloads the seat map but never clears the
+    /// selected-seat list (movieShowtimesReducer keeps bookingChairList), so the summary still shows
+    /// the booked seat and its price. Expected by spec: total "0VND", no seat selected.
+    /// </summary>
+    [Test(Description = "TC_BK_11 - After a successful booking the selection and total are reset")]
+    [Category(TestCategories.Regression)]
+    [Category(TestCategories.RequiresAccount)]
+    [Category(TestCategories.KnownDefect)]
+    public async Task TC_BK_11_SummaryResetAfterBooking()
+    {
+        await LoginAsync();
+        var purchase = await OpenPurchasePageAsync();
+        var seat = await purchase.SelectAvailableSeatAsync();
+
+        await purchase.ClickBookAsync();
+        await Expect(purchase.Alert.Title).ToHaveTextAsync(AppMessages.Get.BookingSuccessTitle);
+        await purchase.Alert.ConfirmAsync();
+        await purchase.WaitUntilReadyAsync();
+        await Expect(purchase.Seat(seat)).ToHaveCountAsync(0);
+
         await Expect(purchase.TotalPrice).ToHaveTextAsync("0VND");
+        await Expect(purchase.SelectedSeatsSummary).Not.ToContainTextAsync($"Ghế {seat}");
     }
 }

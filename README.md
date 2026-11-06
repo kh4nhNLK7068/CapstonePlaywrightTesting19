@@ -40,30 +40,33 @@ xây dựng bằng **Playwright for .NET + NUnit** theo mô hình **Page Object 
 
 | Chỉ số | Kết quả |
 |---|---|
-| Tổng số test case (spreadsheet) | **45** |
-| Tổng số lượt test tự động (tính cả các bộ dữ liệu của data-driven test) | **48** |
+| Tổng số test case (spreadsheet) | **47** |
+| Tổng số lượt test tự động (tính cả các bộ dữ liệu của data-driven test) | **50** |
 | Test không cần tài khoản - đã chạy | **41 / 41 Passed** · 0 Failed · 0 Skipped |
 | Thời gian chạy 41 test | **31 giây** |
-| Test cần tài khoản (category `RequiresAccount`) | 7 - chạy riêng bằng tài khoản test (xem [mục 6.4](#64-lọc-test-theo-nhóm--class--tên)) |
+| Test cần tài khoản (category `RequiresAccount`) | 9 - chạy riêng bằng tài khoản test (xem [mục 6.4](#64-lọc-test-theo-nhóm--class--tên)) |
+| Test kiểm tra lỗi đã biết (category `KnownDefect`) | 1 - **dự kiến Failed** cho tới khi ứng dụng sửa BUG-01 |
 
 **Kết quả theo module**
 
-| Module | Số TC | Passed | Chưa chạy (cần tài khoản) |
-|---|---:|---:|---:|
-| Smoke / điều hướng | 6 | 6 | 0 |
-| Đăng ký | 12 | 10 | 2 |
-| Đăng nhập / Đăng xuất | 10 | 7 | 3 |
-| Đặt vé nhanh (trang chủ) | 5 | 5 | 0 |
-| Chi tiết phim | 3 | 3 | 0 |
-| Chọn ghế & đặt vé | 9 | 7 | 2 |
-| **Tổng** | **45** | **38** | **7** |
+| Module | Số TC | Passed | Failed | Chưa chạy (cần tài khoản) |
+|---|---:|---:|---:|---:|
+| Smoke / điều hướng | 6 | 6 | 0 | 0 |
+| Đăng ký | 12 | 10 | 0 | 2 |
+| Đăng nhập / Đăng xuất | 10 | 7 | 0 | 3 |
+| Đặt vé nhanh (trang chủ) | 5 | 5 | 0 | 0 |
+| Chi tiết phim | 3 | 3 | 0 | 0 |
+| Chọn ghế & đặt vé | 11 | 7 | 1 (BUG-01) | 3 |
+| **Tổng** | **47** | **38** | **1** | **8** |
 
-**Phát hiện trong quá trình kiểm thử**
+**Lỗi phát hiện trong quá trình kiểm thử** (chi tiết ở sheet *Defects* của [`docs/TestCases.xlsx`](docs/TestCases.xlsx))
 
-- **TC_SU_09:** khi đã nhập *Mật khẩu* nhưng bỏ trống *Nhập lại mật khẩu*, ứng dụng hiển thị
-  “Mật khẩu không khớp !” thay vì “Đây là trường bắt buộc !” như các trường bắt buộc khác.
-  Test đang kiểm tra theo hành vi thực tế của ứng dụng, và điểm này được ghi chú trong spreadsheet.
-- Ô *Email* ở form đăng ký **không kiểm tra định dạng phía client** (ví dụ `abc` vẫn được chấp nhận). Ứng dụng chỉ kiểm tra trường bắt buộc.
+| Bug | Test case | Mô tả | Mức độ |
+|---|---|---|---|
+| **BUG-01** | TC_BK_11 | Đặt vé thành công thì sơ đồ ghế được tải lại và ghế vừa đặt thành “X”, nhưng **phần tóm tắt không được reset**: tổng tiền vẫn là giá ghế cũ (ví dụ `90000VND`) và mục “Chọn” vẫn còn “Ghế xx”. Nguyên nhân: reducer `movieShowtimesReducer` không xoá `bookingChairList` khi tải lại dữ liệu phòng vé. | Medium |
+| **BUG-02** | TC_SU_09 | Đã nhập *Mật khẩu* nhưng bỏ trống *Nhập lại mật khẩu* thì app báo “Mật khẩu không khớp !” thay vì “Đây là trường bắt buộc !”. Test đang kiểm tra theo hành vi thực tế và ghi chú lại. | Low |
+
+Ngoài ra, ô *Email* ở form đăng ký **không kiểm tra định dạng phía client** (ví dụ `abc` vẫn được chấp nhận). Ứng dụng chỉ kiểm tra trường bắt buộc.
 
 Chi tiết từng test case (bước thực hiện, dữ liệu, kết quả mong đợi, script automation tương ứng, trạng thái)
 nằm trong [`docs/TestCases.xlsx`](docs/TestCases.xlsx).
@@ -79,7 +82,7 @@ nằm trong [`docs/TestCases.xlsx`](docs/TestCases.xlsx).
 | Đăng nhập | TC_SI_01 - 04 (data-driven), 05 - 06 (data-driven, server), 07 - 10 | Bỏ trống, mật khẩu < 6 ký tự, sai tài khoản, ẩn/hiện mật khẩu, đăng nhập thành công, đăng xuất (đồng ý / huỷ) |
 | Đặt vé nhanh | TC_HS_01 - 03 (data-driven), 04, 05 | Thiếu phim / rạp / suất chiếu, chọn đủ → trang chọn ghế, dropdown phụ thuộc nhau |
 | Chi tiết phim | TC_MD_01 - 03 | Poster → trang chi tiết, suất chiếu → trang chọn ghế, nút “Mua vé” cuộn trang |
-| Chọn ghế & đặt vé | TC_BK_01 - 09 | Sơ đồ ghế, chọn/bỏ chọn, tổng tiền, ghế đã đặt, đặt vé khi chưa đăng nhập, chưa chọn ghế, đặt vé thành công |
+| Chọn ghế & đặt vé | TC_BK_01 - 11 | Sơ đồ ghế, chọn/bỏ chọn, tổng tiền, ghế đã đặt, đặt vé khi chưa đăng nhập, chưa chọn ghế, đặt 1 ghế thành công, **đặt nhiều ghế trong một lượt**, reset tóm tắt sau khi đặt vé |
 
 Nhóm test (category) dùng để lọc khi chạy:
 
@@ -90,6 +93,7 @@ Nhóm test (category) dùng để lọc khi chạy:
 | `Validation` | Validate client-side và server-side (bỏ trống, sai định dạng, trùng dữ liệu) |
 | `Regression` | Các trường hợp bổ sung |
 | `RequiresAccount` | Cần tài khoản thật: có đăng ký hoặc đăng nhập trên server demo |
+| `KnownDefect` | Kiểm tra hành vi đúng theo đặc tả của một lỗi đã xác nhận, nên **dự kiến fail** cho tới khi ứng dụng được sửa. Loại khỏi lần chạy bằng `--filter "TestCategory!=KnownDefect"` |
 
 ---
 
@@ -284,6 +288,12 @@ Kết hợp điều kiện (`&` = và, `|` = hoặc):
 
 ```bash
 dotnet test --filter "TestCategory=Smoke&TestCategory!=RequiresAccount"
+```
+
+Chạy toàn bộ nhưng bỏ qua test của lỗi đã biết (ví dụ khi muốn pipeline xanh):
+
+```bash
+dotnet test --filter "TestCategory!=KnownDefect"
 ```
 
 ### 6.5. Đổi cấu hình khi chạy (không cần sửa code)
