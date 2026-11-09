@@ -1,0 +1,62 @@
+[
+  {
+    "Id": "TC_SU_01",
+    "Title": "All fields empty",
+    "Username": "", "Password": "", "ConfirmPassword": "", "FullName": "", "Email": "",
+    "ExpectedErrors": {
+      "taiKhoan": "Đây là trường bắt buộc !",
+      "matKhau": "Đây là trường bắt buộc !",
+      "confirmPassWord": "Đây là trường bắt buộc !",
+      "hoTen": "Đây là trường bắt buộc !",
+      "email": "Đây là trường bắt buộc !"
+    }
+  },
+  {
+    "Id": "TC_SU_02",
+    "Title": "Username empty",
+    "Username": "", "Password": "Abc@123", "ConfirmPassword": "Abc@123", "FullName": "Nguyen Van A", "Email": "a@mail.com",
+    "ExpectedErrors": { "taiKhoan": "Đây là trường bắt buộc !" }
+  },
+  {
+    "Id": "TC_SU_03",
+    "Title": "Password empty",
+    "Username": "user{{random}}", "Password": "", "ConfirmPassword": "", "FullName": "Nguyen Van A", "Email": "a@mail.com",
+    "ExpectedErrors": { "matKhau": "Đây là trường bắt buộc !", "confirmPassWord": "Đây là trường bắt buộc !" }
+  },
+  {
+    "Id": "TC_SU_04",
+    "Title": "Password shorter than 6 characters",
+    "Username": "user{{random}}", "Password": "12345", "ConfirmPassword": "12345", "FullName": "Nguyen Van A", "Email": "a@mail.com",
+    "ExpectedErrors": { "matKhau": "Mật khẩu phải có ít nhất 6 kí tự !" }
+  },
+  {
+    "Id": "TC_SU_05",
+    "Title": "Confirm password does not match",
+    "Username": "user{{random}}", "Password": "Abc@123", "ConfirmPassword": "Abc@124", "FullName": "Nguyen Van A", "Email": "a@mail.com",
+    "ExpectedErrors": { "confirmPassWord": "Mật khẩu không khớp !" }
+  },
+  {
+    "Id": "TC_SU_06",
+    "Title": "Full name contains digits",
+    "Username": "user{{random}}", "Password": "Abc@123", "ConfirmPassword": "Abc@123", "FullName": "Nguyen Van A1", "Email": "a@mail.com",
+    "ExpectedErrors": { "hoTen": "Họ và tên không chứa số !" }
+  },
+  {
+    "Id": "TC_SU_07",
+    "Title": "Full name empty",
+    "Username": "user{{random}}", "Password": "Abc@123", "ConfirmPassword": "Abc@123", "FullName": "", "Email": "a@mail.com",
+    "ExpectedErrors": { "hoTen": "Đây là trường bắt buộc !" }
+  },
+  {
+    "Id": "TC_SU_08",
+    "Title": "Email empty",
+    "Username": "user{{random}}", "Password": "Abc@123", "ConfirmPassword": "Abc@123", "FullName": "Nguyen Van A", "Email": "",
+    "ExpectedErrors": { "email": "Đây là trường bắt buộc !" }
+  },
+  {
+    "Id": "TC_SU_09",
+    "Title": "Confirm password empty while password is filled",
+    "Username": "user{{random}}", "Password": "Abc@123", "ConfirmPassword": "", "FullName": "Nguyen Van A", "Email": "a@mail.com",
+    "ExpectedErrors": { "confirmPassWord": "Mật khẩu không khớp !" }
+  }
+]
